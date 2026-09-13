@@ -158,6 +158,8 @@ GameObject:
   - component: {fileID: 3343620868280005057}
   - component: {fileID: 7547594087457626281}
   - component: {fileID: 3839992973359997269}
+  - component: {fileID: 7269956173056414258}
+  - component: {fileID: -84659838480065665}
   m_Layer: 0
   m_Name: FreeCamPlayer
   m_TagString: Untagged
@@ -253,8 +255,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39d5e4b97b1615f4aae984a3d5f4235f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: PurrNet.Runtime::PurrNet.NetworkOwnershipToggle
-  _networkRules: {fileID: 0}
-  _visitiblityRules: {fileID: 0}
   _isSetup: 0
   _prefabId: -2147483648
   _hasPrefabScope: 0
@@ -264,6 +264,8 @@ MonoBehaviour:
   _parent: {fileID: 0}
   _invertedPathToNearestParent: 
   _directChildren: []
+  _networkRules: {fileID: 0}
+  _visitiblityRules: {fileID: 0}
   _components:
   - target: {fileID: 3632144021381091555}
     activeAsOwner: 1
@@ -289,8 +291,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 817fe5016bd0a2a49a95b6eb338bb132, type: 3}
   m_Name: 
   m_EditorClassIdentifier: PurrNet.Runtime::PurrNet.NetworkTransform
-  _networkRules: {fileID: 0}
-  _visitiblityRules: {fileID: 0}
   _isSetup: 0
   _prefabId: -2147483648
   _hasPrefabScope: 0
@@ -300,6 +300,8 @@ MonoBehaviour:
   _parent: {fileID: 0}
   _invertedPathToNearestParent: 
   _directChildren: []
+  _networkRules: {fileID: 0}
+  _visitiblityRules: {fileID: 0}
   _syncPosition: 2
   _syncRotation: 2
   _syncScale: 1
@@ -311,6 +313,54 @@ MonoBehaviour:
   _ownerAuth: 1
   _interpolationTiming: 0
   _adaptiveSynchronization: 2
+--- !u!54 &7269956173056414258
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5154484800931780872}
+  serializedVersion: 5
+  m_Mass: 0.0000001
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &-84659838480065665
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5154484800931780872}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.17, y: 2.17, z: 2.17}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &9125522938505943470
 GameObject:
   m_ObjectHideFlags: 0

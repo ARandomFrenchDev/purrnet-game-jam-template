@@ -174,7 +174,7 @@ Light:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 203844586}
   m_Enabled: 1
-  serializedVersion: 13
+  serializedVersion: 12
   m_Type: 1
   m_Color: {r: 1, g: 0.9785366, b: 0.92, a: 1}
   m_Intensity: 3.14159
@@ -226,7 +226,7 @@ Light:
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ForceVisible: 0
-  m_ShapeRadius: 0
+  m_ShadowRadius: 0
   m_ShadowAngle: 0
   m_LightUnit: 1
   m_LuxAtDistance: 1
@@ -674,8 +674,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cded085d155cde949b60f67a11dbc3bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.RenderPipelines.Core.Runtime::UnityEngine.Rendering.ProbeVolume
-  version: 2
-  globalVolume: 0
   mode: 2
   size: {x: 20, y: 6, z: 20}
   overrideRendererFilters: 0
@@ -706,6 +704,8 @@ MonoBehaviour:
     e33: 0
   cachedHashCode: 0
   fillEmptySpaces: 0
+  version: 2
+  globalVolume: 0
 --- !u!4 &1182891855
 Transform:
   m_ObjectHideFlags: 0
@@ -1743,6 +1743,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7823694312774259421}
+  - component: {fileID: 7823694312774259423}
+  - component: {fileID: 7823694312774259422}
   m_Layer: 0
   m_Name: UnityMaterialBall_Gold
   m_TagString: Untagged
@@ -1824,6 +1826,40 @@ Transform:
   - {fileID: 3874231289254137071}
   m_Father: {fileID: 505702790}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7823694312774259422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7482880494889535591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caed7fb846021dc498608258e988aed5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PickUpTest
+  scoreValue: 1
+--- !u!65 &7823694312774259423
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7482880494889535591}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 3.81, y: 3.23, z: 1.97}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7845786399117771539
 GameObject:
   m_ObjectHideFlags: 0
