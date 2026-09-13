@@ -22,7 +22,7 @@ public class GameManager : NetworkBehaviour
     private readonly SyncVar<int> _connectedPlayerCount = new(0);
 
     private int _expectedPlayerCount;
-    private bool _roundActive;
+    public bool _roundActive;
     private bool _countdownStarted;
 
     public static event Action OnRoundStarted;
@@ -113,5 +113,7 @@ public class GameManager : NetworkBehaviour
     private void BroadcastRoundStarted() => OnRoundStarted?.Invoke();
 
     [ObserversRpc]
-    private void BroadcastRoundEnded() => OnRoundEnded?.Invoke();
+    private void BroadcastRoundEnded()  {
+        OnRoundEnded?.Invoke();
+    }
 }
