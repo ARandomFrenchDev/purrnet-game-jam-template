@@ -1,28 +1,40 @@
+using Unity.Cinemachine;
 using PurrNet;
 using UnityEngine;
 
-// PurrNet : on hérite de NetworkBehaviour au lieu de MonoBehaviour
 public class PlayerController : NetworkBehaviour
 {
     [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private float targetWeight = 1f;
+    [SerializeField] private float targetRadius = 1f;
 
-    private Vector2 _input;
+    private CinemachineTargetGroup _targetGroup;
 
-    private void OnSpawned()
+    protected override void OnSpawned(bool asServer)
     {
-        Debug.Log(isOwner);
+        if (asServer)
+            return;
+
+        _targetGroup = FindObjectOfType<CinemachineTargetGroup>();
+        if (_targetGroup != null)
+            _targetGroup.AddMember(transform, targetWeight, targetRadius);
     }
+
+    protected override void OnDespawned(bool asServer)
+    {
+        if (asServer)
+            return;
+
+        if (_targetGroup != null)
+            _targetGroup.RemoveMember(transform);
+    }
+
     private void Update()
     {
-        // isOwner = true uniquement sur le client qui possède ce joueur
-        // Sans ce check, tout le monde bougerait tous les joueurs à la fois
         if (!isOwner)
             return;
 
-        _input.x = Input.GetAxisRaw("Horizontal");
-        _input.y = Input.GetAxisRaw("Vertical");
-
-        Vector3 move = new Vector3(_input.x, _input.y, 0f).normalized;
-        transform.position += move * moveSpeed * Time.deltaTime;
+        Vector2 input = new(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        transform.position += (Vector3)input.normalized * moveSpeed * Time.deltaTime;
     }
 }
