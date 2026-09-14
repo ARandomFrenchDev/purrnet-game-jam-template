@@ -22,7 +22,7 @@ public class GameManager : NetworkBehaviour
     private readonly SyncVar<int> _connectedPlayerCount = new(0);
 
     private int _expectedPlayerCount;
-    public bool _roundActive;
+    private readonly SyncVar<bool> _roundActive = new(false);
     private bool _countdownStarted;
 
     public static event Action OnRoundStarted;
@@ -80,7 +80,7 @@ public class GameManager : NetworkBehaviour
     private void StartRound()
     {
         _scores.Clear();
-        _roundActive = true;
+        _roundActive.value = true;
         _roundTimer.StartTimer(roundDuration);
         BroadcastRoundStarted();
     }
@@ -90,7 +90,7 @@ public class GameManager : NetworkBehaviour
         if (!isServer || !_roundActive)
             return;
 
-        _roundActive = false;
+        _roundActive.value = false;
         BroadcastRoundEnded();
     }
 

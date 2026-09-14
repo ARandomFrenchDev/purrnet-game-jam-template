@@ -62,14 +62,14 @@ public class ItemSpawner : NetworkBehaviour
 
     private IEnumerator SpawnRoutine()
     {
-        while (GameManager.Instance != null &&  GameManager.Instance._roundActive)
+        while (GameManager.Instance != null &&  GameManager.Instance.IsRoundActive)
         {
             // Attend un délai aléatoire
             float waitTime = Random.Range(_minSpawnTime, _maxSpawnTime);
             yield return new WaitForSeconds(waitTime);
 
             // Vérifie si la round est toujours active
-            if (GameManager.Instance == null || !GameManager.Instance._roundActive)
+            if (GameManager.Instance == null || !GameManager.Instance.IsRoundActive)
                 break;
 
             // Compte les items déjà présents dans la zone

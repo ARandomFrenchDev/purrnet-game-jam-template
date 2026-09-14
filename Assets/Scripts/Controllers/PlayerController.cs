@@ -58,7 +58,7 @@ public class PlayerController : NetworkBehaviour
         if (!isOwner)
             return;
 
-        if(GameManager.Instance._roundActive)
+        if(GameManager.Instance.IsRoundActive)
         {
             HandleMovement();  
         }
