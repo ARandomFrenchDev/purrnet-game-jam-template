@@ -19,9 +19,11 @@ public class GameManager : NetworkBehaviour
     private readonly SyncTimer _roundTimer = new();
     private readonly SyncTimer _countdownTimer = new();
     private readonly SyncDictionary<PlayerID, int> _scores = new();
+    public SyncDictionary<PlayerID, int> Scores => _scores;
     private readonly SyncVar<int> _connectedPlayerCount = new(0);
 
     private int _expectedPlayerCount;
+    public bool IsRoundActive => _roundActive.value;
     private readonly SyncVar<bool> _roundActive = new(false);
     private bool _countdownStarted;
 
@@ -52,10 +54,14 @@ public class GameManager : NetworkBehaviour
     }
 
     // Appelée par chaque PlayerController depuis OnSpawned(asServer: true)
-    public void RegisterPlayer()
+    public void RegisterPlayer(PlayerController player)
     {
         if (!isServer || _countdownStarted)
             return;
+
+        int slot = _connectedPlayerCount.value;
+        string username = /* à récupérer depuis le lobby, cf note plus bas */ $"Player {slot + 1}";
+        player.AssignSlot(slot, username);
 
         _connectedPlayerCount.value++;
 
@@ -106,8 +112,6 @@ public class GameManager : NetworkBehaviour
             _scores.Add(id, amount);
     }
 
-    public SyncDictionary<PlayerID, int> Scores => _scores;
-    public bool IsRoundActive => _roundActive;
 
     [ObserversRpc]
     private void BroadcastRoundStarted() => OnRoundStarted?.Invoke();

@@ -31,10 +31,25 @@ public class PlayerController : NetworkBehaviour
     private float _nextBarkTime;
     private float _nextBoostTime;
 
+    private readonly SyncVar<int> _slotIndex = new(-1);
+    private readonly SyncVar<string> _username = new("Player");
+
+    public int SlotIndex => _slotIndex.value;
+    public string Username => _username.value;
+
+    public void AssignSlot(int slot, string username)
+    {
+        if (!isServer)
+            return;
+
+        _slotIndex.value = slot;
+        _username.value = username;
+    }
+
     protected override void OnSpawned(bool asServer)
     {
         if (asServer)
-            GameManager.Instance.RegisterPlayer();
+            GameManager.Instance.RegisterPlayer(this);
 
         if (asServer)
             return;
