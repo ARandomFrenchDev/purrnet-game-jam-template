@@ -122,7 +122,7 @@ public class ItemSpawner : NetworkBehaviour
         GameObject newItem = Instantiate(prefab, spawnPosition, spawnRotation);
 
         // Si l'item a un NetworkIdentity, il sera synchronisé automatiquement
-        Debug.Log($"Item spawned: {prefab.name} at {spawnPosition}");
+        // Debug.Log($"Item spawned: {prefab.name} at {spawnPosition}");
     }
 
     private Vector3 GetRandomPositionInCollider()

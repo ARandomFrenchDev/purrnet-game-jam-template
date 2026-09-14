@@ -58,7 +58,11 @@ public class PlayerController : NetworkBehaviour
         if (!isOwner)
             return;
 
-        HandleMovement();
+        if(GameManager.Instance._roundActive)
+        {
+            HandleMovement();  
+        }
+
 
         if (Input.GetKeyDown(KeyCode.E) && Time.time >= _nextBarkTime)
         {

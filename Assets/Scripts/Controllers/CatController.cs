@@ -1,35 +1,86 @@
+using System.Collections;
 using PurrNet;
 using UnityEngine;
 
-// PNJ chat : patrouille simple, aucune IA complexe nécessaire pour une jam
 public class CatController : NetworkBehaviour
 {
-    [SerializeField] private Transform[] patrolPoints;
     [SerializeField] private float speed = 2f;
     [SerializeField] private float stunDuration = 1.5f;
+    [SerializeField] private float fadeDuration = 1f;
+    [SerializeField] private BoxCollider boxCollider;
+    [SerializeField] private SpriteRenderer childSprite; // sprite sur le GameObject enfant
 
-    private int _targetIndex;
+    private Transform _targetPoint;
+    private bool _isDespawning;
+
+    public void Initialize(Transform[] patrolPoints)
+    {
+        if (patrolPoints != null && patrolPoints.Length > 0)
+            _targetPoint = patrolPoints[Random.Range(0, patrolPoints.Length)];
+    }
 
     private void Update()
     {
-        if (!isServer || patrolPoints.Length == 0)
-            return; // seul le serveur déplace le chat, la position est répliquée via NetworkTransform
+        if (!isServer || _isDespawning || _targetPoint == null)
+            return;
 
-        Transform target = patrolPoints[_targetIndex];
-        transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, _targetPoint.position, speed * Time.deltaTime);
 
-        if (Vector3.Distance(transform.position, target.position) < 0.1f)
-            _targetIndex = (_targetIndex + 1) % patrolPoints.Length;
+        if (Vector3.Distance(transform.position, _targetPoint.position) < 0.1f)
+            BeginDespawnSequence(); // arrivé à destination -> despawn normal
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!isServer)
+        if (!isServer || _isDespawning)
             return;
 
         if (other.TryGetComponent<PlayerController>(out var player))
         {
             player.Stun(stunDuration);
+            BeginDespawnSequence(); // baston -> despawn anticipé
         }
+    }
+
+    private void BeginDespawnSequence()
+    {
+        if (_isDespawning)
+            return;
+
+        _isDespawning = true;
+        PlayFadeOutSequence();
+        Invoke(nameof(DespawnNow), fadeDuration);
+    }
+
+    [ObserversRpc]
+    private void PlayFadeOutSequence()
+    {
+        if (boxCollider != null)
+            boxCollider.enabled = false;
+
+        StartCoroutine(FadeOut());
+    }
+
+    private IEnumerator FadeOut()
+    {
+        if (childSprite == null)
+            yield break;
+
+        float t = 0f;
+        Color startColor = childSprite.color;
+
+        while (t < fadeDuration)
+        {
+            t += Time.deltaTime;
+            float alpha = Mathf.Lerp(1f, 0f, t / fadeDuration);
+            childSprite.color = new Color(startColor.r, startColor.g, startColor.b, alpha);
+            yield return null;
+        }
+    }
+
+    private void DespawnNow()
+    {
+        if (isServer)
+            Destroy(gameObject);
     }
 }

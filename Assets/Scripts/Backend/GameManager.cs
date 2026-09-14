@@ -9,7 +9,7 @@ public class GameManager : NetworkBehaviour
     public static GameManager Instance { get; private set; }
 
     [Header("Round settings")]
-    [SerializeField] private float roundDuration = 60f;
+    [SerializeField] public float roundDuration = 60f;
     [SerializeField] private float countdownDuration = 3f;
 
     [Header("Player count source")]
