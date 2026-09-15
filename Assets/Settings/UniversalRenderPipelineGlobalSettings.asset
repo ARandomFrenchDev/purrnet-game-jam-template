@@ -75,7 +75,7 @@ MonoBehaviour:
       - rid: 8420768364850315265
     m_RuntimeSettings:
       m_List: []
-  m_AssetVersion: 11
+  m_AssetVersion: 12
   m_ObsoleteDefaultVolumeProfile: {fileID: 0}
   m_RenderingLayerNames:
   - Light Layer default
