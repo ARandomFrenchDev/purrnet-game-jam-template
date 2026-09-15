@@ -1118,6 +1118,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 413755498}
+  - component: {fileID: 413755499}
   m_Layer: 5
   m_Name: EndingScreen
   m_TagString: Untagged
@@ -1145,6 +1146,23 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &413755499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 413755497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e001bd3932676ef409c74d7474f60bc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EndRoundLeaderboard
+  panel: {fileID: 550519694}
+  rowsParent: {fileID: 663647661}
+  rowPrefab: {fileID: 2613995981129033215, guid: 2146decc5aed0ec49af4ab59cd71a92b, type: 3}
+  quitButton: {fileID: 1072246978}
+  _orchestrator: {fileID: 11400000, guid: 704da3cbd39612a40a56993c820af3f2, type: 2}
 --- !u!1 &488590150
 GameObject:
   m_ObjectHideFlags: 0
@@ -1241,14 +1259,13 @@ GameObject:
   - component: {fileID: 550519695}
   - component: {fileID: 550519698}
   - component: {fileID: 550519697}
-  - component: {fileID: 550519696}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &550519695
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1270,22 +1287,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 929.7568, y: 621.1068}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &550519696
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 550519694}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e001bd3932676ef409c74d7474f60bc2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EndRoundLeaderboard
-  panel: {fileID: 550519694}
-  rowsParent: {fileID: 663647661}
-  rowPrefab: {fileID: 2613995981129033215, guid: 2146decc5aed0ec49af4ab59cd71a92b, type: 3}
-  quitButton: {fileID: 1072246978}
 --- !u!114 &550519697
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1961,7 +1962,7 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 0
+  m_ChildAlignment: 4
   m_Spacing: 0
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1

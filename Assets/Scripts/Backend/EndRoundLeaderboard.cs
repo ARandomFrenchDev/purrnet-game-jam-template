@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using PurrNet.Lobby;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,12 +9,13 @@ public class EndRoundLeaderboard : MonoBehaviour
     [SerializeField] private Transform rowsParent;
     [SerializeField] private LeaderboardRow rowPrefab;
     [SerializeField] private Button quitButton;
-
+    [SerializeField] private GameOrchestrator _orchestrator; // même asset "Orchestrator.Jam" que dans LobbyManager
     private void OnEnable()
     {
         GameManager.OnRoundEnded += Show;
         quitButton.onClick.AddListener(QuitToMainMenu);
         panel.SetActive(false);
+
     }
 
     private void OnDisable()
@@ -54,7 +56,11 @@ public class EndRoundLeaderboard : MonoBehaviour
 
     private void QuitToMainMenu()
     {
-        // Attention : cf note ci-dessous, ne pas juste charger la scène brutalement
+        if (PurrNet.NetworkManager.main.isServer)
+            PurrNet.NetworkManager.main.StopServer();
+        else
+            PurrNet.NetworkManager.main.StopClient();
+
         UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
     }
 }
